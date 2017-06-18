@@ -195,6 +195,8 @@ open class WalletView: UIView {
     
     /** This block is called after the receiver’s card view is presented or dimissed. */
     public var didUpdatePresentedCardViewBlock: PresentedCardViewDidUpdateBlock?
+  
+    public var isEnabledOverHeaderWhenPresent = false
     
     /** Returns an accessory view that is displayed above the wallet view. */
     @IBOutlet public weak var walletHeader: UIView? {
@@ -516,7 +518,7 @@ open class WalletView: UIView {
         
         walletHeaderHeight = walletHeader?.frame.height ?? 0
         
-        cardViewTopInset = scrollView.contentInset.top + walletHeaderHeight
+        cardViewTopInset = isEnabledOverHeaderWhenPresent ? 0.0 : scrollView.contentInset.top + walletHeaderHeight
         
         collapsedCardViewStackHeight = (minimalDistanceBetweenCollapsedCardViews * CGFloat(maximimNumberOfCollapsedCardViewsToShow)) + distanceBetweetCollapsedAndPresentedCardViews
         
